@@ -1,0 +1,117 @@
+/* Game UI styles. Tailwind utilities via @apply so shadcn's theme tokens still apply. */
+/* @reference lets @apply resolve theme utilities in this separate file (Tailwind v4). */
+@reference "./index.css";
+
+.page {
+  @apply mx-auto flex min-h-svh max-w-sm flex-col justify-center gap-4 px-4 py-8 text-center;
+}
+
+/* Each block of the page is a card, so header and board read as separate groups. */
+.panel {
+  @apply flex flex-col gap-4 rounded-xl border border-border bg-card p-5;
+}
+
+.join {
+  @apply flex flex-col gap-2;
+}
+
+.field {
+  @apply w-full rounded-lg border border-input bg-background px-3 py-2 text-center;
+  @apply focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none;
+}
+
+.title {
+  @apply text-4xl font-medium tracking-tight;
+}
+
+.status {
+  @apply text-lg text-muted-foreground;
+}
+
+.status-over {
+  @apply text-xl font-semibold text-foreground;
+}
+
+.board {
+  @apply grid w-full grid-cols-3 gap-2 transition-opacity;
+}
+
+/* Game over: dim the board so it reads as finished, not playable. */
+.board-over {
+  @apply opacity-60;
+}
+
+.cell {
+  @apply flex aspect-square items-center justify-center rounded-lg border text-5xl font-semibold;
+  @apply border-border bg-muted text-foreground transition-colors;
+  @apply focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none;
+}
+
+.cell:enabled {
+  @apply cursor-pointer hover:border-foreground/40;
+}
+
+/* The three cells that won: full contrast, so they stand out against the dimmed board. */
+.cell-win {
+  @apply border-foreground bg-foreground text-background opacity-100;
+}
+
+.restart {
+  @apply cursor-pointer rounded-lg bg-primary px-6 py-2.5 font-medium text-primary-foreground;
+  @apply transition-opacity hover:opacity-90;
+  @apply focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none;
+}
+
+.subtitle {
+  @apply text-sm font-medium tracking-wide text-muted-foreground uppercase;
+}
+
+/* Scrolls rather than pushing the board off-screen once a few games pile up. */
+.history {
+  @apply flex max-h-80 list-none flex-col gap-2 overflow-y-auto p-0 text-left;
+}
+
+.history-row {
+  @apply flex items-center gap-3 rounded-lg border border-border p-2;
+}
+
+.history-meta {
+  @apply flex min-w-0 flex-1 flex-col;
+}
+
+.history-opponent {
+  @apply truncate text-sm font-medium;
+}
+
+.history-date {
+  @apply text-xs text-muted-foreground;
+}
+
+/* Thumbnail of the final board: same grid as .board, sized to fit a list row. */
+.mini-board {
+  @apply grid shrink-0 grid-cols-3 gap-px rounded bg-border p-px;
+}
+
+.mini-cell {
+  @apply flex size-4 items-center justify-center bg-card text-[9px] leading-none font-semibold;
+}
+
+.mini-cell-win {
+  @apply bg-foreground text-background;
+}
+
+.badge {
+  @apply shrink-0 rounded-full border px-2 py-0.5 text-xs font-medium;
+}
+
+.badge-win {
+  @apply border-transparent bg-foreground text-background;
+}
+
+.badge-loss {
+  @apply border-destructive/40 text-destructive;
+}
+
+.badge-draw {
+  @apply border-border text-muted-foreground;
+}
