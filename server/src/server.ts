@@ -14,6 +14,7 @@ import { prisma } from "../lib/prisma.js";
 import gamesRoutes from "./routes/games.routes.js";
 import cors from "cors";
 
+const clientUrl = process.env.CLIENT_URL;
 interface ConnectedUser {
   id: string;
   username: string;
@@ -25,7 +26,7 @@ const waitingPlayers: string[] = [];
 
 const app = express();
 
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(cors({ origin: clientUrl, credentials: true }));
 app.use(express.json());
 
 const server = http.createServer(app);
@@ -38,7 +39,7 @@ app.use("/api/games", gamesRoutes);
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: clientUrl,
   },
 });
 

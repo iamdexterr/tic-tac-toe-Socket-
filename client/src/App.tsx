@@ -5,8 +5,8 @@ import { io } from "socket.io-client";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import type { Cell, GameState } from "./game/ticTacToe";
-const newSocket = io(`http://${location.hostname}:8081`);
-const API = `http://${location.hostname}:8081`;
+const newSocket = io(import.meta.env.VITE_API_URL);
+const API = import.meta.env.VITE_API_URL;
 
 type HistoryGame = {
   id: string;
